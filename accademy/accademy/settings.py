@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^j@biklj$)w^ae*gm11bpp*s!ssbq*bgtc60cls=+=s^2!#9nj'
+SECRET_KEY = config("SECRET_KEY")
+DEBUG = config("DEBUG", cast=bool)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,6 +35,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "accademyapp",
+    "accounts",
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -103,6 +107,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "accounts.User"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASS": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",       
+    )
+}
+SIMPLE_JWT ={
+    "ACCESS_TOKEN_LIFTIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
@@ -127,3 +143,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+# SECURE_BROWSER_XSS_FILTER = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
