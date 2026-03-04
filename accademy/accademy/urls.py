@@ -21,5 +21,6 @@ from accademyapp.views import  hello_api
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', hello_api),
-    path("api/", include("accademyapp.urls"))
+    path("api/", include("accademyapp.urls")),
+    path("accounts/", include("accounts.urls"))
 ]
