@@ -7,6 +7,8 @@ phone_validator = RegexValidator(r'^\d{10}$', "Enter valid 10 digit number")
 
 class Course(models.Model):
     name = models.CharField(max_length=100)
+    details = models.TextField()
+    image = models.ImageField(upload_to='courses/')
     fees = models.PositiveIntegerField()
     duration = models.PositiveIntegerField(help_text="Duration in months")
 

@@ -17,9 +17,9 @@ from .serializers import CourseSerializer, StudentSerializer
 
 
 
-@api_view(['GET'])
-def hello_api(request):
-    return Response({"message": "Hello DRF"})
+# @api_view(['GET'])
+# def hello_api(request):
+#     return Response({"message": "Hello DRF"})
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
