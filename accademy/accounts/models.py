@@ -7,7 +7,11 @@ class User(AbstractUser):
         ("admin", "Admin"),
         ("student", "Student"),
     )
-    role = models.CharField(max_length=10, choices=ROLE_CHOICE, default=None)
+    role = models.CharField(
+    max_length=10,
+    choices=ROLE_CHOICE,
+    default="admin"
+)
     email = models.EmailField(unique=True)
     is_verified = models.BooleanField(default=False)
 

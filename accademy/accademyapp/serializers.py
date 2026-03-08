@@ -4,7 +4,7 @@ from .models import Course, Student
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = ['id', 'name', 'details', 'image', 'fees', 'duration']
 
 class StudentSerializer(serializers.ModelSerializer):
     course_name = serializers.CharField(source="course.name", read_only=True)
